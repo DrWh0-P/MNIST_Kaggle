@@ -14,16 +14,16 @@ def show(ind):
 
 # import data
 train=pd.read_csv('train.csv').astype('uint8')
-X=train.ix[:,1:].as_matrix().reshape(-1,1,28,28)
+X=train.ix[:,1:].as_matrix()
 X=X/np.float32(256)
 Y=train.ix[:,0].as_matrix()
 
 #intializing tensor variables
-input_var = theano.tensor.tensor4('inputs')
+input_var = theano.tensor.matrix('inputs')
 target_var = theano.tensor.ivector('target')
 
 #creating neural net with 2 hiddenlayers
-l_in=le.layers.InputLayer(shape=(None,1,28,28),input_var=input_var)
+l_in=le.layers.InputLayer(shape=(None,784),input_var=input_var)
 l_in_drop = le.layers.DropoutLayer(l_in, p=0.2)
 l_hid=le.layers.DenseLayer(l_in_drop,num_units=800,nonlinearity=le.nonlinearities.rectify,W=le.init.GlorotUniform())
 l_hid_drop = le.layers.DropoutLayer(l_hid, p=0.5)
