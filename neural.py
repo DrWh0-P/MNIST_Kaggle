@@ -39,20 +39,6 @@ def iterate_batches(x,y,bsize):
     for start in range(0,len(x)-bsize+1,bsize):
         slice1=indices[start:start+bsize]
         yield x[slice1],y[slice1]
-'''
-
-def iterate_minibatches(inputs, targets, batchsize, shuffle=False):
-    assert len(inputs) == len(targets)
-    if shuffle:
-        indices = np.arange(len(inputs))
-        np.random.shuffle(indices)
-    for start_idx in range(0, len(inputs) - batchsize + 1, batchsize):
-        if shuffle:
-            excerpt = indices[start_idx:start_idx + batchsize]
-        else:
-            excerpt = slice(start_idx, start_idx + batchsize)
-        yield inputs[excerpt], targets[excerpt]
-''' 
 
 #loss and update function
 prediction=le.layers.get_output(l_out)
